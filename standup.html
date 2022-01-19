@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <title>standup.shuffle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.14/vue.min.js"></script>
+</head>
+
+<body>
+    <div class="flex-container" id="app">
+        <div class="row">
+            <div class="flex-item">
+                <h1 v-if="randomName && team.length">{{ randomName }}</h1>
+                <h2 v-if="team.length === 0">🎉</h2>
+                <button v-on:click="shuffle()" class="btn-grad" v-if="team.length">Who's next?</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                randomName: 'Push Button',
+                team: ["Ben", "Aleksei", "Oleksandr", "Attila", "Taras", "Dominika"]
+            }
+        },
+        methods: {
+            shuffle() {
+                const random = Math.floor(Math.random() * this.team.length);
+                const randomName = this.team[random];
+                this.team.splice(random, 1);
+                console.log(this.team)
+                this.randomName = randomName;
+            },
+        }
+    });
+</script>
+
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        background-color: #FBAB7E;
+        background-image: -webkit-linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+        background-image: -moz-linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+        background-image: -o-linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+        background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+
+    }
+
+    button {
+        border: 0;
+        border-radius: 15px;
+        padding: 10px;
+        color: #fff;
+        font-weight: bold;
+        background-image: radial-gradient(circle farthest-corner at 10.2% 55.8%, rgba(252, 37, 103, 1) 0%, rgba(250, 38, 151, 1) 46.2%, rgba(186, 8, 181, 1) 90.1%);
+        cursor: pointer;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+
+    h1 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 2em;
+        padding-top: 40px;
+    }
+
+    h2 {
+        font-size: 4em;
+    }
+
+    .flex-container {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .row {
+        width: auto;
+        background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);
+        width: 250px;
+        height: 250px;
+        border-radius: 50px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+
+    .flex-item {
+        text-align: center;
+
+    }
+</style>
